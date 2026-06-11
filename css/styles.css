@@ -291,7 +291,9 @@ main { flex: 1; padding: 18px 24px 40px; max-width: 1180px; width: 100%; margin:
 /* ===== Toast ===== */
 .toast {
   position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-  background: #28a046; color: #fff; padding: 14px 28px; border-radius: 8px;
+  background: var(--accent); color: #fff;
+  border: 1px solid var(--query);
+  padding: 14px 28px; border-radius: 8px;
   font-weight: 800; font-size: 15px; z-index: 200;
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
   transition: opacity .2s, transform .2s;

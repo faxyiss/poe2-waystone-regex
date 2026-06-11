@@ -710,7 +710,18 @@
       card.appendChild(query);
 
       const actions = document.createElement("div"); actions.className = "card-actions";
-      actions.appendChild(mkBtn(T("COPY", "KOPYALA"), true, function () { if (item.query) { copyText(item.query); toast(T("✔ Regex copied to clipboard!", "✔ Regex panoya kopyalandı!")); } }));
+      const copyCardBtn = mkBtn(T("COPY", "KOPYALA"), true, function () {
+        if (!item.query) return;
+        copyText(item.query);
+        toast(T("✔ Regex copied to clipboard!", "✔ Regex panoya kopyalandı!"));
+        copyCardBtn.classList.add("copied");
+        copyCardBtn.textContent = T("✔ COPIED!", "✔ KOPYALANDI!");
+        setTimeout(function () {
+          copyCardBtn.classList.remove("copied");
+          copyCardBtn.textContent = T("COPY", "KOPYALA");
+        }, 900);
+      });
+      actions.appendChild(copyCardBtn);
       actions.appendChild(mkBtn(T("SHOW", "GÖSTER"), false, function () { $("queryBox").value = item.query; switchTab("builder"); recalculate(); }));
       actions.appendChild(mkBtn(T("EXPORT", "İNDİR"), false, function () { exportSaved(item); }));
       actions.appendChild(mkBtn("⚙", false, function () { openSavedEditor(item); }));
