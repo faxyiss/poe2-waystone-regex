@@ -107,6 +107,8 @@ main { flex: 1; padding: 18px 24px 40px; max-width: 1180px; width: 100%; margin:
 .btn-lg { min-width: 180px; height: 54px; font-size: 16px; }
 .btn-sm { padding: 8px 14px; font-size: 13px; }
 .btn.copied { background: #28a046 !important; border-color: #28a046 !important; color: #fff; }
+.btn-danger { background: var(--back); color: #ff6b4a; border: 2px solid #c0392b; }
+.btn-danger:hover { background: #c0392b; color: #fff; }
 
 .hint { font-size: 12px; color: var(--fore); margin: 14px 0 6px; opacity: 0.85; }
 

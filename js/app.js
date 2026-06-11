@@ -480,6 +480,35 @@
     });
   }
 
+  // ===== Tüm verileri temizleme =====
+  function openClearDataDialog() {
+    openModal(T("⚠ CLEAR ALL DATA", "⚠ TÜM VERİLERİ TEMİZLE"), function (c) {
+      const p = document.createElement("p");
+      p.style.maxWidth = "420px";
+      p.style.lineHeight = "1.6";
+      p.textContent = T(
+        "This will permanently delete ALL data stored in this browser: every saved regex, your tags, theme, font and language settings. The page will reload as a fresh install. This cannot be undone!",
+        "Bu işlem tarayıcıda saklanan TÜM verileri kalıcı olarak siler: bütün kayıtlı regexler, etiketlerin, tema, font ve dil ayarların. Sayfa sıfır kurulum gibi yeniden yüklenecek. Bu işlem geri alınamaz!");
+      c.appendChild(p);
+      const n = document.createElement("p");
+      n.style.fontWeight = "800";
+      n.textContent = T("Saved regexes: ", "Kayıtlı regex sayısı: ") + saved.length;
+      c.appendChild(n);
+    }, {
+      spread: true,
+      buttons: [
+        { text: T("CANCEL", "İPTAL"), onClick: function (close) { close(); } },
+        { text: T("🗑 DELETE EVERYTHING", "🗑 HEPSİNİ SİL"), accent: true, onClick: function () {
+            try {
+              localStorage.removeItem("wsrx.settings");
+              localStorage.removeItem("wsrx.saved");
+            } catch (e) { /* yok say */ }
+            location.reload();
+          } },
+      ],
+    });
+  }
+
   // ===== Kayıt düzenleme diyaloğu (SavedRegexDialog) =====
   function openSavedEditor(item) {
     let tags = item.tags.slice();
@@ -783,6 +812,7 @@
     $("sortLbl").textContent = T("SORT:", "SIRALA:");
     $("importBtn").textContent = T("📂 LOAD FROM FILE", "📂 DOSYADAN YÜKLE");
     $("tagSettingsBtn").textContent = "🏷 TAG SETTINGS";
+    $("clearDataBtn").textContent = T("🗑 CLEAR ALL DATA", "🗑 TÜM VERİLERİ TEMİZLE");
     $("disclaimer").textContent = T(
       "Unofficial fan-made tool. Not affiliated with Grinding Gear Games. Path of Exile and Path of Exile 2 are trademarks of Grinding Gear Games. MIT-style free use. Data is stored locally in your browser.",
       "Resmi olmayan bir hayran aracı. Grinding Gear Games ile bağlantılı değildir. Path of Exile ve Path of Exile 2, Grinding Gear Games'in ticari markalarıdır. Serbest kullanım. Veriler tarayıcında yerel olarak saklanır.");
@@ -884,6 +914,7 @@
 
     // Ayarlar
     $("tagSettingsBtn").addEventListener("click", openTagManager);
+    $("clearDataBtn").addEventListener("click", openClearDataDialog);
 
     rebuildSortItems();
     applyLanguage();
