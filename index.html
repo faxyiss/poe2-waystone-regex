@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PoE2 Waystone Regex</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Başlık + sekme çubuğu -->
+    <header class="topbar">
+      <div class="brand">☄ PoE2 WAYSTONE REGEX</div>
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-tab="builder">REGEX BUILDER</button>
+        <button class="tab" data-tab="saved">SAVED REGEXES</button>
+        <button class="tab" data-tab="settings">SETTINGS</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ===== REGEX BUILDER ===== -->
+      <section class="panel active" id="panel-builder">
+        <label class="out-label" id="outLabel"></label>
+        <textarea id="queryBox" class="query-box" spellcheck="false" rows="3"></textarea>
+
+        <div class="btn-row">
+          <button id="copyBtn" class="btn btn-accent btn-lg"></button>
+          <button id="clearBtn" class="btn btn-outline btn-lg"></button>
+        </div>
+
+        <p class="hint" id="hintLabel"></p>
+
+        <div class="stat-table" id="statTable">
+          <div class="stat-head">
+            <span></span>
+            <span class="col-min" id="minHead">MIN %</span>
+            <span class="col-max" id="maxHead">MAX % (0 = ∞)</span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- stat satırları JS ile üretilir -->
+        </div>
+
+        <div class="mod-row">
+          <button id="modsBtn" class="btn btn-accent">⚙ WAYSTONE MODIFIERS</button>
+          <button id="corruptBtn" class="btn btn-outline"></button>
+        </div>
+
+        <div class="bottom">
+          <div class="summaries">
+            <div id="summaryLabel" class="summary"></div>
+            <div id="modSummaryLabel" class="summary muted"></div>
+          </div>
+          <button id="saveBtn" class="btn btn-accent btn-save"></button>
+        </div>
+      </section>
+
+      <!-- ===== SAVED REGEXES ===== -->
+      <section class="panel" id="panel-saved">
+        <div class="saved-header">
+          <span class="lbl">🔍</span>
+          <input id="savedSearch" class="text-input" type="text" />
+          <span class="lbl" id="tagFilterLbl">TAG:</span>
+          <select id="savedTag" class="select"></select>
+          <span class="lbl" id="sortLbl">SORT:</span>
+          <select id="savedSort" class="select"></select>
+          <button id="importBtn" class="btn btn-outline btn-sm"></button>
+          <input id="fileInput" type="file" accept=".wsrx,.json" multiple hidden />
+        </div>
+        <div id="savedList" class="saved-list"></div>
+      </section>
+
+      <!-- ===== SETTINGS ===== -->
+      <section class="panel" id="panel-settings">
+        <div class="settings-grid">
+          <label class="set-lbl" id="themeLbl">THEME</label>
+          <select id="themeSelect" class="select wide"></select>
+
+          <label class="set-lbl" id="fontLbl">FONT</label>
+          <select id="fontSelect" class="select wide"></select>
+
+          <label class="set-lbl" id="langLbl">LANGUAGE</label>
+          <select id="langSelect" class="select wide">
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+          </select>
+
+          <span></span>
+          <button id="tagSettingsBtn" class="btn btn-outline wide">🏷 TAG SETTINGS</button>
+        </div>
+        <p class="disclaimer" id="disclaimer"></p>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal kabuğu (iç içe pencereler desteklenir) -->
+  <div id="modalRoot" class="modal-root hidden">
+    <div class="modal-backdrop"></div>
+  </div>
+
+  <!-- Kopyalama bildirimi -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/regex.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

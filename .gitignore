@@ -1,0 +1,8 @@
+# Masaüstü C# kaynağı — yalnız web sürümü paylaşılıyor
+WaystoneRegexApp-main/
+
+# Geçici / araç dosyaları
+node_modules/
+*.log
+Thumbs.db
+desktop.ini
